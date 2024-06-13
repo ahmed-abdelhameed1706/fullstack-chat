@@ -18,3 +18,6 @@ app.use("/api/messages", messageRouter);
 app.listen(5000, () => {
   console.log("Server is running on http://localhost:5000");
 });
+
+// TODO: Add socket to the server
+// TODO: Configure this server for deployment
