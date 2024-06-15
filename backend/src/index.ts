@@ -4,11 +4,10 @@ import messageRouter from "./routes/message.route.js";
 
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import { app, server } from "./socket/socket.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
-
-const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
@@ -17,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRouter);
 app.use("/api/messages", messageRouter);
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("Server is running on Port ", PORT);
 });
 

@@ -1,30 +1,34 @@
-import { useEffect, useRef } from "react";
+// import { useEffect, useRef } from "react";
 import useGetMessages from "../../hooks/useGetMessages";
 import useConversation from "../../zustand/useConversation";
 import Message from "./Message";
+import useListenMessages from "../../hooks/useListenMessages";
+import useChatScroll from "../../hooks/useChatScroll";
 
 const Messages = () => {
   const { messages, isLoading } = useGetMessages();
   const { selectedConversation } = useConversation();
-  const messageEndRef = useRef<HTMLDivElement>(null);
+  // const messageEndRef = useRef<HTMLDivElement>(null);
+  const ref = useChatScroll(messages) as React.MutableRefObject<HTMLDivElement>;
+  useListenMessages();
 
-  const scrollToBottom = () => {
-    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  // const scrollToBottom = () => {
+  //   messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  // };
 
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages]);
 
   return (
-    <div className="px-4 flex-1 overflow-auto">
+    <div className="px-4 flex-1 overflow-auto" ref={ref}>
       {isLoading && (
         <span className="flex items-center justify-center loading loading-spinner mx-auto h-full " />
       )}
       {messages.map((message) => (
         <Message key={message.id} message={message} />
       ))}
-      <div ref={messageEndRef} />
+      {/* <div ref={messageEndRef} /> */}
       {!isLoading && messages.length === 0 && (
         <div className="flex items-center justify-center w-full h-full">
           <p className="text-gray-200">
