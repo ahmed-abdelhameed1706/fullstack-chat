@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch backend/src --exec tsx backend/src/index.ts",
-    "build": "tsc && npm ci && prisma generate --schema=./backend/prisma/schema.prisma && npm ci --prefix frontend && npm run build --prefix frontend",
+    "build": "tsc",
     "start": "node backend/dist/index.js"
   },
   "type": "module",
