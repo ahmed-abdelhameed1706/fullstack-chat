@@ -24,15 +24,6 @@ jobs:
         run: |
           npm run build
 
-      - name: Install Frontend Dependencies
-        run: |
-          cd frontend
-          npm ci
-
-      - name: Build Frontend
-        run: |
-          cd frontend
-
       - name: Manage PM2 and Nginx
         run: |
           cd backend
