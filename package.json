@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch backend/src --exec tsx backend/src/index.ts",
     "build": "tsc",
-    "start": "node backend/dist/index.js"
+    "start": "node backend/dist/src/index.js"
   },
   "type": "module",
   "keywords": [],
