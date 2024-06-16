@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: "18"
 
+      - name: Install PM2
+        run: npm install -g pm2
+
       - name: Install backend dependencies
         run: npm ci
 
