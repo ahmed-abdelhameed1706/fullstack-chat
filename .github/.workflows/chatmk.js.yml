@@ -1,0 +1,43 @@
+name: ChatMK
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.x
+
+      - name: Install Backend Dependencies
+        run: |
+          npm run build
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Build Frontend
+        run: |
+          cd frontend
+
+      - name: Manage PM2 and Nginx
+        run: |
+          cd backend
+          pm2 stop 0
+          pm2 reload 0 
+          pm2 start 0
+          pm2 save
+          sudo service nginx restart
